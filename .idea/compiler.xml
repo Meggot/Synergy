@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Account_API" />
+        <module name="Account_Service" />
+        <module name="Admin_API" />
+        <module name="Admin_Service" />
+        <module name="End_To_End_Testing" />
+        <module name="Infrastructure" />
+        <module name="Project_API" />
+        <module name="Project_Service" />
+        <module name="Web_App" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Account_API" target="1.5" />
+      <module name="Account_Service" target="1.5" />
+      <module name="Admin_API" target="1.5" />
+      <module name="Admin_Service" target="1.5" />
+      <module name="End_To_End_Testing" target="1.5" />
+      <module name="Infrastructure" target="1.5" />
+      <module name="parent" target="1.5" />
+      <module name="Project_API" target="1.5" />
+      <module name="Project_Service" target="1.5" />
+      <module name="Web_App" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
