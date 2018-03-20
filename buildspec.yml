@@ -19,6 +19,7 @@ artifacts:
     - Infrastructure/target/Infrastructure-1.0-SNAPSHOT.jar
     - Project_API/target/Project_API-1.0-SNAPSHOT.jar
     - Project_Service/target/Project_Service-1.0-SNAPSHOT.jar
+    - Common/target/Common-1.0-SNAPSHOT.jar
     - Web_App/target/Web_App-1.0-SNAPSHOT.jar
   discard-paths: yes
 cache:

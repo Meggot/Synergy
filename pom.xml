@@ -17,5 +17,6 @@
         <module>Admin_Service</module>
         <module>Infrastructure</module>
         <module>End_To_End_Testing</module>
+        <module>Common</module>
     </modules>
 </project>
