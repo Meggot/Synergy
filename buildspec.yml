@@ -4,9 +4,6 @@ env:
   variables:
     JAVA_VERSION: "jdk1.8.0_111"
     JAVA_HOME: "/usr/lib/jvm/java-8-openjdk-amd64"
-  parameter-store:
-    LOGIN_PASSWORD: "dockerLoginPassword"
-
 phases:
   install:
     commands:
