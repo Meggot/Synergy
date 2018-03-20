@@ -1,0 +1,29 @@
+version:
+
+env:
+  variables:
+    JAVA_VERSION: "jdk1.8.0_111"
+    JAVA_HOME: "/usr/lib/jvm/java-8-openjdk-amd64"
+  parameter-store:
+    LOGIN_PASSWORD: "dockerLoginPassword"
+
+phases:
+  install:
+    commands:
+      - echo Entered the install phase...
+      - mvn clean install
+artifacts:
+  files:
+    - Account_API/target/Account_API-1.0-SNAPSHOT.jar
+    - Account_Service/target/Account_Service-1.0-SNAPSHOT.jar
+    - Admin_API/target/Admin_API-1.0.SNAPSHOT.jar
+    - Admin_Service/target/Admin_Service-1.0.SNAPSHOT.jar
+    - End_To_End_Testing/target/End_To_End_Testing-1.0.SNAPSHOT.jar
+    - Infrastructure/target/Infrastructure-1.0.SNAPSHOT.jar
+    - Project_API/target/Project_API-1.0.SNAPSHOT.jar
+    - Project_Service/target/Project_Service-1.0.SNAPSHOT.jar
+    - Web_App/target/Web_App-1.0.SNAPSHOT.jar
+  discard-paths: yes
+cache:
+  paths:
+    - '/root/.m2/**/*'
