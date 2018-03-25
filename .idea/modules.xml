@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Account_API/Account_API.iml" filepath="$PROJECT_DIR$/Account_API/Account_API.iml" />
+      <module fileurl="file://$PROJECT_DIR$/API/API.iml" filepath="$PROJECT_DIR$/API/API.iml" />
       <module fileurl="file://$PROJECT_DIR$/Account_Service/Account_Service.iml" filepath="$PROJECT_DIR$/Account_Service/Account_Service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Admin_API/Admin_API.iml" filepath="$PROJECT_DIR$/Admin_API/Admin_API.iml" />
       <module fileurl="file://$PROJECT_DIR$/Admin_Service/Admin_Service.iml" filepath="$PROJECT_DIR$/Admin_Service/Admin_Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/Common/Common.iml" filepath="$PROJECT_DIR$/Common/Common.iml" />
       <module fileurl="file://$PROJECT_DIR$/End_To_End_Testing/End_To_End_Testing.iml" filepath="$PROJECT_DIR$/End_To_End_Testing/End_To_End_Testing.iml" />
       <module fileurl="file://$PROJECT_DIR$/Infrastructure/Infrastructure.iml" filepath="$PROJECT_DIR$/Infrastructure/Infrastructure.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Project_API/Project_API.iml" filepath="$PROJECT_DIR$/Project_API/Project_API.iml" />
       <module fileurl="file://$PROJECT_DIR$/Project_Service/Project_Service.iml" filepath="$PROJECT_DIR$/Project_Service/Project_Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/Web_App/Web_App.iml" filepath="$PROJECT_DIR$/Web_App/Web_App.iml" />
       <module fileurl="file://$PROJECT_DIR$/parent.iml" filepath="$PROJECT_DIR$/parent.iml" />

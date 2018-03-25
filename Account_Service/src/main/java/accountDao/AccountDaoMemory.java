@@ -1,6 +1,8 @@
 package accountDao;
 
 import models.Account;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
@@ -8,10 +10,19 @@ import java.util.*;
  * Created by bradleyw on 24/03/2018.
  * This is for testing purposes without spinning up a test db
  */
+@Component(value="accountDao")
+@Profile("test")
 public class AccountDaoMemory implements AccountDaoInterface {
     private Map<Long, Account> accountMap;
 
     public AccountDaoMemory() {
+        setAccountMap(new HashMap<Long, Account>() {{
+            put(1L, new Account(1L, "Meggot", "Meggot@username.com"));
+            put(2L, new Account(2L, "Sharkbait", "Sharkbait@username.com"));
+            put(3L, new Account(3L, "Poza", "Poza@username.com"));
+            put(4L, new Account(4L, "Zolu", "Zolu@username.com"));
+            put(5L, new Account(5L, "Sciatican", "Sciatican@username.com"));
+        }});
     }
 
     @Override

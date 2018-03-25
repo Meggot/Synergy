@@ -1,9 +1,14 @@
 package handlers;
 
 import accountDao.AccountDaoInterface;
+import accountDao.AccountDaoMemory;
 import interfaces.SynergyRequestHandler;
 
 import models.Account;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import requests.CreateAccountRequest;
 import requests.LoginAccountRequest;
 import responses.CreateAccountResponse;
@@ -12,19 +17,28 @@ import requests.UpdateAccountRequest;
 import responses.UpdateAccountResponse;
 import sessions.SessionsService;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
  * Created by bradleyw on 24/03/2018.
  */
 
+@Component
 public class AccountRequestHandler implements SynergyRequestHandler{
 
     private SessionsService sessionsService;
+
+    @Autowired
+    @Qualifier("accountDao")
     private AccountDaoInterface accountDao;
 
     public AccountRequestHandler() {
         setSessionsService(new SessionsService());
+    }
+
+    public List<Account> getAllAccounts() {
+        return accountDao.getAllAccounts();
     }
 
     public CreateAccountResponse handleCreateAccountRequest(CreateAccountRequest createAccountRequest) {
@@ -68,5 +82,13 @@ public class AccountRequestHandler implements SynergyRequestHandler{
 
     public void setAccountDao(AccountDaoInterface accountDao) {
         this.accountDao = accountDao;
+    }
+
+    public Account getUserById(Long id) {
+        Optional<Account> account = accountDao.getAccountById(id);
+        if (account.isPresent()){
+            return account.get();
+        }
+        return null;
     }
 }

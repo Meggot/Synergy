@@ -9,11 +9,9 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>Account_API</module>
+        <module>API</module>
         <module>Account_Service</module>
-        <module>Project_API</module>
         <module>Project_Service</module>
-        <module>Admin_API</module>
         <module>Admin_Service</module>
         <module>Infrastructure</module>
         <module>End_To_End_Testing</module>
