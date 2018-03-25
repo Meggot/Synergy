@@ -10,6 +10,7 @@
         <module name="Account_Service" />
         <module name="Admin_API" />
         <module name="Admin_Service" />
+        <module name="Common" />
         <module name="End_To_End_Testing" />
         <module name="Infrastructure" />
         <module name="Project_API" />
@@ -18,16 +19,17 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Account_API" target="1.5" />
-      <module name="Account_Service" target="1.5" />
-      <module name="Admin_API" target="1.5" />
-      <module name="Admin_Service" target="1.5" />
-      <module name="End_To_End_Testing" target="1.5" />
-      <module name="Infrastructure" target="1.5" />
+      <module name="Account_API" target="1.8" />
+      <module name="Account_Service" target="1.8" />
+      <module name="Admin_API" target="1.8" />
+      <module name="Admin_Service" target="1.8" />
+      <module name="Common" target="1.8" />
+      <module name="End_To_End_Testing" target="1.8" />
+      <module name="Infrastructure" target="1.8" />
       <module name="parent" target="1.5" />
-      <module name="Project_API" target="1.5" />
-      <module name="Project_Service" target="1.5" />
-      <module name="Web_App" target="1.5" />
+      <module name="Project_API" target="1.8" />
+      <module name="Project_Service" target="1.8" />
+      <module name="Web_App" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

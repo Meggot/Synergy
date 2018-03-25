@@ -5,14 +5,15 @@ import java.util.Date;
 public class Account {
 
     private String username;
-    private int id;
+    private Long id;
     private int pwdId;
     private String email;
     private Date creationDate;
     private boolean deleted;
     private int oca;
 
-    public Account(final String accountUsername, final String accountEmail) {
+    public Account(final Long accountId, final String accountUsername, final String accountEmail) {
+        this.id = accountId;
         this.username = accountUsername;
         this.email = accountEmail;
         this.creationDate = new Date();
@@ -26,11 +27,11 @@ public class Account {
         this.username = username;
     }
 
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(final int id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
