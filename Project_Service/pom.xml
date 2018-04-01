@@ -11,5 +11,12 @@
 
     <artifactId>Project_Service</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>synergy</groupId>
+            <artifactId>Common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
