@@ -1,14 +1,12 @@
 package handlers;
 
-import accountDao.AccountDaoInterface;
-import accountDao.AccountDaoMemory;
+import accountDao.interfaces.AccountDaoInterface;
 import interfaces.SynergyRequestHandler;
 
 import models.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import requests.CreateAccountRequest;
 import requests.LoginAccountRequest;
 import responses.CreateAccountResponse;
@@ -30,7 +28,7 @@ public class AccountRequestHandler implements SynergyRequestHandler{
     private SessionsService sessionsService;
 
     @Autowired
-    @Qualifier("accountDao")
+    @Qualifier("src/main/java/accountDao")
     private AccountDaoInterface accountDao;
 
     public AccountRequestHandler() {

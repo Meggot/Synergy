@@ -11,6 +11,7 @@
         <module name="Admin_Service" />
         <module name="API" />
         <module name="Common" />
+        <module name="DAO" />
         <module name="End_To_End_Testing" />
         <module name="Infrastructure" />
         <module name="Project_Service" />
@@ -24,6 +25,7 @@
       <module name="Admin_Service" target="1.8" />
       <module name="API" target="1.8" />
       <module name="Common" target="1.8" />
+      <module name="DAO" target="1.8" />
       <module name="End_To_End_Testing" target="1.8" />
       <module name="Infrastructure" target="1.8" />
       <module name="parent" target="1.5" />

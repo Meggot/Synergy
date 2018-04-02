@@ -1,5 +1,6 @@
-package accountDao;
+package accountDao.impl;
 
+import accountDao.interfaces.AccountDaoInterface;
 import models.Account;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -10,7 +11,7 @@ import java.util.*;
  * Created by bradleyw on 24/03/2018.
  * This is for testing purposes without spinning up a test db
  */
-@Component(value="accountDao")
+@Component
 @Profile("test")
 public class AccountDaoMemory implements AccountDaoInterface {
     private Map<Long, Account> accountMap;

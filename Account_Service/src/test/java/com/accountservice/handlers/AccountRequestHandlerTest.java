@@ -1,7 +1,9 @@
 package com.accountservice.handlers;
 
 
-import accountDao.AccountDaoMemory;
+import accountDao.impl.AccountDaoMemory;
+import accountDao.interfaces.AccountDaoInterface;
+import dbConfigurations.EmbeddedDatabaseConfiguration;
 import handlers.AccountRequestHandler;
 import models.Account;
 import org.junit.Before;
@@ -9,12 +11,14 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.ContextConfiguration;
 import requests.CreateAccountRequest;
 import requests.LoginAccountRequest;
 import requests.UpdateAccountRequest;
 import responses.LoginAccountResponse;
 
-import java.util.HashMap;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,38 +27,33 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by bradleyw on 24/03/2018.
  */
-
+@ComponentScan("com")
 @RunWith(JUnit4.class)
 public class AccountRequestHandlerTest {
 
+    //  MODEL
+    @Autowired
     private AccountRequestHandler accountRequestHandler;
-    private AccountDaoMemory accountTestingDao;
+
+    // TESTING DAO
+    private AccountDaoInterface accountDao;
 
     public AccountRequestHandlerTest() {
-
+        accountDao = new AccountDaoMemory();
     }
 
     @Before
     public void setup() {
-        accountRequestHandler = new AccountRequestHandler();
-        accountTestingDao = new AccountDaoMemory();
-        accountTestingDao.setAccountMap(new HashMap<Long, Account>() {{
-            put(1L, new Account(1L, "Meggot", "Meggot@username.com"));
-            put(2L, new Account(2L, "Sharkbait", "Sharkbait@username.com"));
-            put(3L, new Account(3L, "Poza", "Poza@username.com"));
-            put(4L, new Account(4L, "Zolu", "Zolu@username.com"));
-            put(5L, new Account(5L, "Sciatican", "Sciatican@username.com"));
-        }});
-        accountRequestHandler.setAccountDao(accountTestingDao);
+        accountRequestHandler.setAccountDao(accountDao);
     }
 
     @Ignore
     @Test
     public void handleGoodCreateAccountRequest() {
-        assertThat(accountTestingDao.getAccountById(6L).isPresent()).isFalse();
+        assertThat(accountDao.getAccountById(6L).isPresent()).isFalse();
         CreateAccountRequest createAccountRequest = new CreateAccountRequest("RickyBobby", "newUser@newUser.com");
         accountRequestHandler.handleCreateAccountRequest(createAccountRequest);
-        Optional<Account> newCreatedAccount = accountTestingDao.getAccountById(6L);
+        Optional<Account> newCreatedAccount = accountDao.getAccountById(6L);
         assertThat(newCreatedAccount.isPresent()).isTrue();
         assertThat(newCreatedAccount.get().getUsername()).isEqualTo("RickyBobby");
         assertThat(newCreatedAccount.get().getEmail()).isEqualTo("newUser@newUser.com");
@@ -64,11 +63,11 @@ public class AccountRequestHandlerTest {
     @Ignore
     @Test
     public void handleGoodUpdateAccountRequest() {
-        Account currentAccount = accountTestingDao.getAccountById(1L).get();
+        Account currentAccount = accountDao.getAccountById(1L).get();
         assertThat(currentAccount.getUsername()).isEqualTo("Meggot");
         Account newAccount = new Account(currentAccount.getId(), "NotMeggot", currentAccount.getEmail());
         accountRequestHandler.handleUpdateAccountRequest(new UpdateAccountRequest(1L, newAccount));
-        assertThat(accountTestingDao.getAccountById(1L).get().getUsername()).isEqualTo("NotMeggot");
+        assertThat(accountDao.getAccountById(1L).get().getUsername()).isEqualTo("NotMeggot");
     }
 
 

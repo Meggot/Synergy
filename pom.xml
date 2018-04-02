@@ -2,12 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
+    <modelVersion>4.0.0</modelVersion>
     <groupId>synergy</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>API</module>
         <module>Account_Service</module>
@@ -16,17 +17,21 @@
         <module>Infrastructure</module>
         <module>End_To_End_Testing</module>
         <module>Common</module>
+        <module>DAO</module>
     </modules>
+
     <properties>
         <java.version>1.8</java.version>
         <spring.boot.version>1.5.8.RELEASE</spring.boot.version>
+        <spring-framework.version>4.3.7.RELEASE</spring-framework.version>
         <hsqldb.version>2.4.0</hsqldb.version>
+        <hibernate.version>4.5.0.FINAL</hibernate.version>
+        <logback.version>1.1.8</logback.version>
+        <slf4j.version>1.7.5</slf4j.version>
     </properties>
 
     <dependencies>
-
-
-        <!-- Spring -->
+        <!-- SpringBoot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -44,6 +49,25 @@
             <version>${spring.boot.version}</version>
         </dependency>
 
+        <!-- Spring and TXs -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring-framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring-framework.version}</version>
+        </dependency>
+
+        <!-- Spring ORM support -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring-framework.version}</version>
+        </dependency>
+
         <!--DB-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -56,8 +80,34 @@
             <version>${hsqldb.version}</version>
         </dependency>
 
+        <!--Hibernate-->
+        <!--
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        -->
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <scope>runtime</scope>
+        </dependency>
 
-        <!-- Test -->
+        <!-- Unit Testing Frameworks -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -70,7 +120,6 @@
             <version>3.8.0</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -87,6 +136,5 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-
     </build>
 </project>

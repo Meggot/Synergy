@@ -1,9 +1,10 @@
-package com.main;
+package main;
 
-import com.configurations.EmbeddedConfiguration;
+import com.configurations.EmbeddedServletConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import runConfigurations.EmbeddedConfiguration;
 
 /**
  * Created by bradleyw on 25/03/2018.
@@ -11,6 +12,6 @@ import org.springframework.context.ApplicationContext;
 @SpringBootApplication
 public class main {
     public static void main(final String[] args) {
-        ApplicationContext applicationContext = SpringApplication.run(EmbeddedConfiguration.class);
+        SpringApplication.run(EmbeddedConfiguration.class);
     }
 }

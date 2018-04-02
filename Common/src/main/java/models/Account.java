@@ -1,9 +1,7 @@
 package models;
 
-import javax.persistence.Entity;
 import java.util.Date;
 
-@Entity
 public class Account {
 
     private String username;

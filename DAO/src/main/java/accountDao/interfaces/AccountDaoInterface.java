@@ -1,4 +1,4 @@
-package accountDao;
+package accountDao.interfaces;
 
 import models.Account;
 import org.springframework.stereotype.Component;

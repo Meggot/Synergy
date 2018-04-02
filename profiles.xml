@@ -4,8 +4,10 @@
              xsi:schemaLocation="http://maven.apache.org/PROFILES/1.0.0 http://maven.apache.org/xsd/profiles-1.0.0.xsd">
     <profiles>
         <profile>
-            <id></id>
-            
+            <id>Synergy</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
     </profiles>
 </profilesXml>
