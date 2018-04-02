@@ -16,6 +16,7 @@ import static org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType.
 public class EmbeddedDatabaseConfiguration {
 
     @Bean(name = "dataSource")
+    @Profile(value="test")
     public EmbeddedDatabase datasource() {
         return new EmbeddedDatabaseBuilder()
                 .generateUniqueName(false)
