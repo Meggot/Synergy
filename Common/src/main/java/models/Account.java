@@ -1,22 +1,31 @@
 package models;
 
+import javax.persistence.*;
 import java.util.Date;
 
-public class Account {
+@Entity
+@Table(name="Accounts")
+public class Account extends EntityObject{
 
-    private String username;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name="pk_user_id")
     private Long id;
-    private int pwdId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="fk_pwd_id")
+    private Password password;
+    @Column(name="username")
+    private String username;
+    @Column(name="email")
     private String email;
-    private Date creationDate;
-    private boolean deleted;
-    private int oca;
+    @Column(name="dob")
+    private Date dateOfBirth;
 
-    public Account(final Long accountId, final String accountUsername, final String accountEmail) {
-        this.id = accountId;
+    public Account(final String accountUsername, final String accountEmail, final Password accountPassword) {
+        super();
         this.username = accountUsername;
         this.email = accountEmail;
-        this.creationDate = new Date();
+        this.password = accountPassword;
     }
 
     public String getUsername() {
@@ -35,14 +44,6 @@ public class Account {
         this.id = id;
     }
 
-    public int getPwdId() {
-        return this.pwdId;
-    }
-
-    public void setPwdId(final int pwdId) {
-        this.pwdId = pwdId;
-    }
-
     public String getEmail() {
         return this.email;
     }
@@ -51,27 +52,44 @@ public class Account {
         this.email = email;
     }
 
-    public Date getCreationDate() {
-        return this.creationDate;
+
+    public Password getPassword() {
+        return password;
     }
 
-    public void setCreationDate(final Date creationDate) {
-        this.creationDate = creationDate;
+    public void setPassword(final Password password) {
+        this.password = password;
     }
 
-    public boolean isDeleted() {
-        return this.deleted;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDeleted(final boolean deleted) {
-        this.deleted = deleted;
+    public void setDateOfBirth(final Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public int getOca() {
-        return this.oca;
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final Account account = (Account) o;
+
+        if (!id.equals(account.id)) return false;
+        if (!password.equals(account.password)) return false;
+        if (!username.equals(account.username)) return false;
+        if (!email.equals(account.email)) return false;
+        return dateOfBirth != null ? dateOfBirth.equals(account.dateOfBirth) : account.dateOfBirth == null;
     }
 
-    public void setOca(final int oca) {
-        this.oca = oca;
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + username.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
+        return result;
     }
 }

@@ -1,8 +1,13 @@
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
-public class Project implements Serializable{
+
+@Entity
+@Table(name="Projects")
+public class Project extends EntityObject{
 
     private String name;
     private int id;

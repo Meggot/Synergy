@@ -24,6 +24,7 @@
     <orderEntry type="module" module-name="Common" />
     <orderEntry type="module" module-name="API" />
     <orderEntry type="module" module-name="Account_Service" />
+    <orderEntry type="module" module-name="Project_Service" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:1.5.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:1.5.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:1.5.8.RELEASE" level="project" />

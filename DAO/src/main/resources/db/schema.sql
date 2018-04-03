@@ -1,19 +1,24 @@
-CREATE TABLE Password(
+CREATE TABLE Passwords(
     pk_pwd_id INTEGER PRIMARY KEY IDENTITY,
     salt varchar(100) NOT NULL,
-    hash_value varchar(100) NOT NULL
+    hash_value varchar(100) NOT NULL,
+    creation_date DATE DEFAULT NULL,
+    modified_date DATE DEFAULT NULL,
+    deleted INTEGER NOT NULL,
+    oca INTEGER NOT NULL
 )
-CREATE TABLE Account(
+CREATE TABLE Accounts(
    pk_user_id INTEGER PRIMARY KEY IDENTITY,
    fk_pwd_id INTEGER FOREIGN KEY REFERENCES Password(pk_pwd_id),
    username varchar(25) DEFAULT NULL,
    email varchar(50) DEFAULT NULL,
    dob DATE DEFAULT NULL,
    creation_date DATE DEFAULT NULL,
+   modified_date DATE DEFAULT NULL,
    deleted INTEGER NOT NULL,
    oca INTEGER NOT NULL
 )
-CREATE TABLE Project(
+CREATE TABLE Projects(
     pk_project_id INTEGER PRIMARY KEY IDENTITY,
     synopsis varchar(255) DEFAULT NULL,
     creation_date DATE DEFAULT NULL,
