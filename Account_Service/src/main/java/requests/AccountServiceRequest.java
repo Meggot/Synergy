@@ -6,17 +6,17 @@ import abstracts.SynergyRequest;
  * Created by bradleyw on 24/03/2018.
  */
 public abstract class AccountServiceRequest extends SynergyRequest {
-    private Long accountId;
+    private Integer accountId;
 
-    protected AccountServiceRequest(Long accountId) {
+    protected AccountServiceRequest(Integer accountId) {
         this.setAccountId(accountId);
     }
 
-    public Long getAccountId() {
+    public Integer getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(Long accountId) {
+    public void setAccountId(Integer accountId) {
         this.accountId = accountId;
     }
 }

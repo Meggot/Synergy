@@ -12,6 +12,6 @@ import java.util.Optional;
 @Component
 public interface AccountDaoInterface {
     List<Account> getAllAccounts();
-    Optional<Account> getAccountById(Long accountId);
+    Optional<Account> getAccountById(Integer accountId);
     void addAccount(Account newAccount);
 }

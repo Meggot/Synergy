@@ -3,6 +3,7 @@ package sessions;
 import models.Account;
 import sessions.models.SessionContext;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.net.InetAddress;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,21 +14,21 @@ import java.util.Map;
  */
 public class SessionsService {
 
-    private Map<Long, SessionContext> activeSessions;
+    private Map<Integer, SessionContext> activeSessions;
 
     public SessionsService() {
-        setActiveSessions(new HashMap<Long, SessionContext>());
+        setActiveSessions(new HashMap<Integer, SessionContext>());
     }
 
-    public Map<Long, SessionContext> getActiveSessions() {
+    public Map<Integer, SessionContext> getActiveSessions() {
         return activeSessions;
     }
 
-    public void setActiveSessions(Map<Long, SessionContext> activeSessions) {
+    public void setActiveSessions(Map<Integer, SessionContext> activeSessions) {
         this.activeSessions = activeSessions;
     }
 
-    public boolean isUserCurrentlyLoggedIn(Long userId) {
+    public boolean isUserCurrentlyLoggedIn(Integer userId) {
         return activeSessions.containsKey(userId);
     }
 

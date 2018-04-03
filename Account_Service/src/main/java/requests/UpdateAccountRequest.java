@@ -8,7 +8,7 @@ import models.Account;
 public class UpdateAccountRequest extends AccountServiceRequest {
     private Account updateAccount;
 
-    public UpdateAccountRequest(Long accountId, Account updatedAccount) {
+    public UpdateAccountRequest(Integer accountId, Account updatedAccount) {
         super(accountId);
         this.setUpdateAccount(updatedAccount);
     }

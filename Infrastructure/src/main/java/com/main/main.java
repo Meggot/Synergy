@@ -1,10 +1,8 @@
-package main;
+package com.main;
 
-import com.configurations.EmbeddedServletConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import runConfigurations.EmbeddedConfiguration;
+import com.runConfigurations.EmbeddedConfiguration;
 
 /**
  * Created by bradleyw on 25/03/2018.

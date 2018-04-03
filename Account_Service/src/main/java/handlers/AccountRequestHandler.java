@@ -28,7 +28,7 @@ public class AccountRequestHandler implements SynergyRequestHandler{
     private SessionsService sessionsService;
 
     @Autowired
-    @Qualifier("src/main/java/accountDao")
+    @Qualifier("src/com.main/java/accountDao")
     private AccountDaoInterface accountDao;
 
     public AccountRequestHandler() {
@@ -82,7 +82,7 @@ public class AccountRequestHandler implements SynergyRequestHandler{
         this.accountDao = accountDao;
     }
 
-    public Account getUserById(Long id) {
+    public Account getUserById(Integer id) {
         Optional<Account> account = accountDao.getAccountById(id);
         if (account.isPresent()){
             return account.get();

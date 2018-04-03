@@ -10,7 +10,7 @@ public class Account extends EntityObject{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="pk_user_id")
-    private Long id;
+    private int id;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fk_pwd_id")
     private Password password;
@@ -36,11 +36,11 @@ public class Account extends EntityObject{
         this.username = username;
     }
 
-    public Long getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(final Long id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -76,7 +76,7 @@ public class Account extends EntityObject{
 
         final Account account = (Account) o;
 
-        if (!id.equals(account.id)) return false;
+        if (!(id == account.id)) return false;
         if (!password.equals(account.password)) return false;
         if (!username.equals(account.username)) return false;
         if (!email.equals(account.email)) return false;
@@ -85,7 +85,7 @@ public class Account extends EntityObject{
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
+        int result = id;
         result = 31 * result + password.hashCode();
         result = 31 * result + username.hashCode();
         result = 31 * result + email.hashCode();

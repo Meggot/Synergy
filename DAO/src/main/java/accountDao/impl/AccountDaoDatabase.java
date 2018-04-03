@@ -39,7 +39,7 @@ public class AccountDaoDatabase implements AccountDaoInterface {
     }
 
     @Override
-    public Optional<Account> getAccountById(Long accountId) {
+    public Optional<Account> getAccountById(Integer accountId) {
         return null;
     }
 

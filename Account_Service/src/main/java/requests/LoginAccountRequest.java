@@ -5,7 +5,7 @@ package requests;
  */
 public class LoginAccountRequest extends AccountServiceRequest {
     private boolean isLoginSuccessful;
-    public LoginAccountRequest(Long accountId) {
+    public LoginAccountRequest(Integer accountId) {
         super(accountId);
     }
 

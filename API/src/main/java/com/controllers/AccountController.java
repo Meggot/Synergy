@@ -48,7 +48,7 @@ public class AccountController {
 
     @ResponseBody
     @RequestMapping(path = "/id/{id}", method = RequestMethod.GET, produces = "application/json")
-    public Account getAccountRequestHandler(@PathVariable final Long id) {
+    public Account getAccountRequestHandler(@PathVariable final Integer id) {
         return accountRequestHandler.getUserById(id);
     }
 

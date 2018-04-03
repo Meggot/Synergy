@@ -1,7 +1,6 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,29 +8,31 @@ import java.util.Date;
 @Table(name="Projects")
 public class Project extends EntityObject{
 
-    private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name="pk_project_id")
     private int id;
+    @OneToOne
+    @JoinColumn(name="fk_owner_id")
+    private Account owner;
+
+    @Column(name="title")
+    private String title;
+
+    @Column(name="synopsis")
     private String synopsis;
-    private Date creationDate;
-    private Date modifiedDate;
-    private boolean deleted;
-    private int oca;
-
-    public Project(final String projectName, final String projectSynopsis) {
-        this.name = projectName;
+    public Project(final String projectTitle, final String projectSynopsis) {
+        super();
+        this.title = projectTitle;
         this.synopsis = projectSynopsis;
-        this.creationDate = new Date();
-        this.deleted = false;
-        this.oca = 0;
     }
 
-
-    public String getName() {
-        return this.name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(final String name) {
-        this.name = name;
+    public void setTitle(final String title) {
+        this.title = title;
     }
 
     public int getId() {
@@ -50,35 +51,11 @@ public class Project extends EntityObject{
         this.synopsis = synopsis;
     }
 
-    public Date getCreationDate() {
-        return this.creationDate;
+    public Account getOwner() {
+        return owner;
     }
 
-    public void setCreationDate(final Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Date getModifiedDate() {
-        return this.modifiedDate;
-    }
-
-    public void setModifiedDate(final Date modifiedDate) {
-        this.modifiedDate = modifiedDate;
-    }
-
-    public boolean isDeleted() {
-        return this.deleted;
-    }
-
-    public void setDeleted(final boolean deleted) {
-        this.deleted = deleted;
-    }
-
-    public int getOca() {
-        return this.oca;
-    }
-
-    public void setOca(final int oca) {
-        this.oca = oca;
+    public void setOwner(final Account owner) {
+        this.owner = owner;
     }
 }

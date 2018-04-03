@@ -14,16 +14,9 @@ import java.util.*;
 @Component
 @Profile("test")
 public class AccountDaoMemory implements AccountDaoInterface {
-    private Map<Long, Account> accountMap;
+    private Map<Integer, Account> accountMap;
 
     public AccountDaoMemory() {
-        setAccountMap(new HashMap<Long, Account>() {{
-            put(1L, new Account(1L, "Meggot", "Meggot@username.com"));
-            put(2L, new Account(2L, "Sharkbait", "Sharkbait@username.com"));
-            put(3L, new Account(3L, "Poza", "Poza@username.com"));
-            put(4L, new Account(4L, "Zolu", "Zolu@username.com"));
-            put(5L, new Account(5L, "Sciatican", "Sciatican@username.com"));
-        }});
     }
 
     @Override
@@ -32,7 +25,7 @@ public class AccountDaoMemory implements AccountDaoInterface {
     }
 
     @Override
-    public Optional<Account> getAccountById(Long accountId) {
+    public Optional<Account> getAccountById(Integer accountId) {
         return Optional.ofNullable(accountMap.get(accountId));
     }
 
@@ -41,7 +34,7 @@ public class AccountDaoMemory implements AccountDaoInterface {
         accountMap.put(account.getId(), account);
     }
 
-    public void setAccountMap(Map<Long, Account> accountMap) {
+    public void setAccountMap(Map<Integer, Account> accountMap) {
         this.accountMap = accountMap;
     }
 }

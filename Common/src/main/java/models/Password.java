@@ -11,22 +11,23 @@ public class Password extends EntityObject{
     @Id
     @Column(name = "pk_pwd_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private int id;
     @Column(name="salt")
     private String salt;
     @Column(name="hash_value")
     private String hashValue;
 
     public Password(final String salt, final String hashValue) {
+        super();
         this.salt = salt;
         this.hashValue = hashValue;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(final Long id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -53,14 +54,14 @@ public class Password extends EntityObject{
 
         final Password password = (Password) o;
 
-        if (id != null ? !id.equals(password.id) : password.id != null) return false;
+        if (id != password.id) return false;
         if (salt != null ? !salt.equals(password.salt) : password.salt != null) return false;
         return hashValue != null ? hashValue.equals(password.hashValue) : password.hashValue == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = id;
         result = 31 * result + (salt != null ? salt.hashCode() : 0);
         result = 31 * result + (hashValue != null ? hashValue.hashCode() : 0);
         return result;
