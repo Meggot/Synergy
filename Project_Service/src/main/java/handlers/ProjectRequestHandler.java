@@ -2,7 +2,6 @@ package handlers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import projectDao.ProjectDao;
 import requests.ProjectCreationRequest;
 import responses.ProjectCreationResponse;
 
@@ -12,8 +11,8 @@ import responses.ProjectCreationResponse;
 @Component
 public class ProjectRequestHandler {
 
-    @Autowired
-    ProjectDao projectDao;
+    //@Autowired
+    //ProjectDao projectDao;
 
     public ProjectCreationResponse handleCreateNewProject(ProjectCreationRequest projectCreationRequest) {
             return null;

@@ -5,9 +5,8 @@ import dbConfigurations.EmbeddedDatabaseConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.PropertySource;
 
-@ComponentScan(basePackages = {"handlers","accountDao","projectDao"})
+@ComponentScan(basePackages = {"handlers", "dao", "repositories"})
 @ComponentScan("com")
 @Configuration
 @Import({EmbeddedDatabaseConfiguration.class, EmbeddedServletConfiguration.class})

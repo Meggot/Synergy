@@ -1,11 +1,10 @@
 package handlers;
 
-import accountDao.interfaces.AccountDaoInterface;
+import dao.daoInterfaces.AccountDao;
 import interfaces.SynergyRequestHandler;
 
 import models.Account;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import requests.CreateAccountRequest;
 import requests.LoginAccountRequest;
@@ -16,7 +15,6 @@ import responses.UpdateAccountResponse;
 import sessions.SessionsService;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by bradleyw on 24/03/2018.
@@ -28,15 +26,14 @@ public class AccountRequestHandler implements SynergyRequestHandler{
     private SessionsService sessionsService;
 
     @Autowired
-    @Qualifier("src/com.main/java/accountDao")
-    private AccountDaoInterface accountDao;
+    private AccountDao accountDao;
 
     public AccountRequestHandler() {
         setSessionsService(new SessionsService());
     }
 
     public List<Account> getAllAccounts() {
-        return accountDao.getAllAccounts();
+        return null;
     }
 
     public CreateAccountResponse handleCreateAccountRequest(CreateAccountRequest createAccountRequest) {
@@ -47,23 +44,7 @@ public class AccountRequestHandler implements SynergyRequestHandler{
         return null;
     }
 
-    public LoginAccountResponse handleLoginRequest(LoginAccountRequest loginAccountRequest) {
-        LoginAccountResponse loginAccountResponse = new LoginAccountResponse(loginAccountRequest);
-        if (getSessionsService().isUserCurrentlyLoggedIn(loginAccountRequest.getAccountId())) {
-            loginAccountResponse.setMessage("That user is already currently logged in");
-            loginAccountRequest.setLoginSuccessful(false);
-            return loginAccountResponse;
-        }
-        Optional<Account> accountOptional = getAccountDao().getAccountById(loginAccountRequest.getAccountId());
-        if (!accountOptional.isPresent())
-        {
-            loginAccountResponse.setMessage("That user does not exist");
-            loginAccountRequest.setLoginSuccessful(false);
-            return loginAccountResponse;
-        }
-        loginAccountRequest.setLoginSuccessful(true);
-        getSessionsService().loginUser(accountOptional.get());
-        return loginAccountResponse;
+    public LoginAccountResponse handleLoginRequest(LoginAccountRequest loginAccountRequest) { return null;
     }
 
     public SessionsService getSessionsService() {
@@ -74,19 +55,15 @@ public class AccountRequestHandler implements SynergyRequestHandler{
         this.sessionsService = sessionsService;
     }
 
-    public AccountDaoInterface getAccountDao() {
+    public AccountDao getAccountDao() {
         return accountDao;
     }
 
-    public void setAccountDao(AccountDaoInterface accountDao) {
+    public void setAccountDao(AccountDao accountDao) {
         this.accountDao = accountDao;
     }
 
     public Account getUserById(Integer id) {
-        Optional<Account> account = accountDao.getAccountById(id);
-        if (account.isPresent()){
-            return account.get();
-        }
-        return null;
+        return accountDao.getAccountById(id);
     }
 }

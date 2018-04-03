@@ -26,18 +26,7 @@ public class AccountController {
     @ResponseBody
     @RequestMapping(path = "/login/{email}/{hashedAndSaltedPassword}")
     public LoginAccountResponse login(@PathVariable(required = true) String email, @PathVariable (required = false) int hashedAndSaltedPassword) {
-        Optional<Account> accountMatchingEmail = accountRequestHandler.getAccountDao().getAllAccounts().stream()
-                .filter(account -> account.getEmail().equals(email))
-                .findAny();
-        if (!accountMatchingEmail.isPresent()) {
-            LoginAccountResponse loginAccountResponse = new LoginAccountResponse(null);
-            loginAccountResponse.setMessage("Couldn't find a user with that email address.");
-            return loginAccountResponse;
-        } else {
-            LoginAccountRequest loginAccountRequest = new LoginAccountRequest(accountMatchingEmail.get().getId());
-            LoginAccountResponse loginAccountResponse = accountRequestHandler.handleLoginRequest(loginAccountRequest);
-            return loginAccountResponse;
-        }
+        return null;
     }
 
     @ResponseBody

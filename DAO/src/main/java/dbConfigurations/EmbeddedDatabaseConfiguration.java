@@ -1,5 +1,6 @@
 package dbConfigurations;
 
+import dao.daoImplementations.AccountDaoRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -26,6 +27,11 @@ public class EmbeddedDatabaseConfiguration {
                 .addScript("db/schema.sql")
                 .setName("TestDatabase")
                 .build();
+    }
+
+    @Bean(name="accountDaoRepository")
+    public AccountDaoRepository accountDaoRepository() {
+        return new AccountDaoRepository();
     }
 }
 
