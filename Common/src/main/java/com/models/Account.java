@@ -1,4 +1,6 @@
-package models;
+package com.models;
+
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,7 +10,7 @@ import java.util.Date;
 public class Account extends EntityObject{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name="pk_user_id")
     private int id;
     @OneToOne(cascade = CascadeType.ALL)
@@ -21,6 +23,11 @@ public class Account extends EntityObject{
     @Column(name="dob")
     private Date dateOfBirth;
 
+    public Account() {
+
+    }
+
+    @PersistenceConstructor
     public Account(final String accountUsername, final String accountEmail, final Password accountPassword) {
         super();
         this.username = accountUsername;

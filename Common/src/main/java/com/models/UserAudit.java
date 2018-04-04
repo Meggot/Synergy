@@ -1,24 +1,27 @@
-package models;
+package com.models;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name="Project_Audits")
-public class ProjectAudit extends EntityObject{
+@Table(name="User_Audits")
+public class UserAudit extends EntityObject{
 
     @Id
     @Column(name="pk_audit_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
-    @OneToOne
-    @JoinColumn(name="fk_project_id")
-    private Project project;
+    @JoinColumn(name="fk_account_id")
+    private Account account;
     @Column(name="value")
     private String value;
 
-    public ProjectAudit(final Project project, final String value) {
-        this.project = project;
+    public UserAudit() {
+
+    }
+
+    public UserAudit(final String value, final Account account) {
         this.value = value;
+        this.account = account;
     }
 
     public int getId() {
@@ -29,19 +32,19 @@ public class ProjectAudit extends EntityObject{
         this.id = id;
     }
 
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(final Project project) {
-        this.project = project;
-    }
-
     public String getValue() {
         return value;
     }
 
     public void setValue(final String value) {
         this.value = value;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(final Account account) {
+        this.account = account;
     }
 }

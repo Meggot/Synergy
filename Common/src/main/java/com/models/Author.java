@@ -1,4 +1,4 @@
-package models;
+package com.models;
 
 import javax.persistence.*;
 
@@ -18,6 +18,10 @@ public class Author extends EntityObject {
     private Account account;
     @Column(name="ownership_level")
     private int ownershiplevel;
+
+    public Author(){
+
+    }
 
     public Author(final ProjectPart projectPart, final Account account, final int ownershiplevel) {
         super();

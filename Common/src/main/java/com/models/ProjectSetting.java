@@ -1,4 +1,4 @@
-package models;
+package com.models;
 
 import javax.persistence.*;
 
@@ -16,6 +16,10 @@ public class ProjectSetting extends EntityObject {
     private String key;
     @Column(name="value")
     private String value;
+
+    public ProjectSetting() {
+
+    }
 
     public ProjectSetting(final Project project, final String key, final String value) {
         super();

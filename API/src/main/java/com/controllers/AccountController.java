@@ -1,15 +1,15 @@
 package com.controllers;
 
 import handlers.AccountRequestHandler;
-import models.Account;
+import com.models.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
-import requests.LoginAccountRequest;
+import requests.CreateAccountRequest;
+import responses.CreateAccountResponse;
 import responses.LoginAccountResponse;
 
 import java.util.List;
-import java.util.Optional;
 
 
 /**
@@ -39,6 +39,16 @@ public class AccountController {
     @RequestMapping(path = "/id/{id}", method = RequestMethod.GET, produces = "application/json")
     public Account getAccountRequestHandler(@PathVariable final Integer id) {
         return accountRequestHandler.getUserById(id);
+    }
+
+    @ResponseBody
+    @RequestMapping(path="/create/{username}/{email}/{hashedpassword}/{salt}")
+    public CreateAccountResponse createNewAccount(@PathVariable final String username,
+                                                  @PathVariable final String email,
+                                                  @PathVariable final String hashedPassword,
+                                                  @PathVariable final String salt) {
+        return accountRequestHandler.handleCreateAccountRequest(
+                new CreateAccountRequest(username, email, hashedPassword, salt));
     }
 
     public void setAccountRequestHandler(AccountRequestHandler accountRequestHandler) {

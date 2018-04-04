@@ -1,6 +1,6 @@
 package sessions.models;
 
-import models.Account;
+import com.models.Account;
 
 import java.net.InetAddress;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package models;
+package com.models;
 
 import javax.persistence.*;
 
@@ -10,12 +10,16 @@ import javax.persistence.*;
 public class Password extends EntityObject{
     @Id
     @Column(name = "pk_pwd_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
     @Column(name="salt")
     private String salt;
     @Column(name="hash_value")
     private String hashValue;
+
+    public Password() {
+
+    }
 
     public Password(final String salt, final String hashValue) {
         super();

@@ -1,7 +1,7 @@
 package responses;
 
-import abstracts.SynergyRequest;
-import abstracts.SynergyResponse;
+import com.abstracts.SynergyRequest;
+import com.abstracts.SynergyResponse;
 
 /**
  * Created by bradleyw on 31/03/2018.

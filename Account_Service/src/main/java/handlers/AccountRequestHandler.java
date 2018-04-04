@@ -1,9 +1,10 @@
 package handlers;
 
 import dao.daoInterfaces.AccountDao;
-import interfaces.SynergyRequestHandler;
+import com.interfaces.SynergyRequestHandler;
 
-import models.Account;
+import com.models.Account;
+import com.models.Password;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import requests.CreateAccountRequest;
@@ -33,11 +34,15 @@ public class AccountRequestHandler implements SynergyRequestHandler{
     }
 
     public List<Account> getAllAccounts() {
-        return null;
+        return accountDao.getAllAccounts();
     }
 
     public CreateAccountResponse handleCreateAccountRequest(CreateAccountRequest createAccountRequest) {
-        return null;
+        Password generatedPassword = new Password(createAccountRequest.getHashedPassword(), createAccountRequest.getHashedPassword());
+        accountDao.createNewAccount(createAccountRequest.getRequestedUsername(), createAccountRequest.getRequestedEmail(), generatedPassword);
+        CreateAccountResponse response = new CreateAccountResponse(createAccountRequest);
+        response.setMessage("Successfully created an account.");
+        return response;
     }
 
     public UpdateAccountResponse handleUpdateAccountRequest(UpdateAccountRequest updateAccountRequest) {

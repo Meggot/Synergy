@@ -1,8 +1,6 @@
-package models;
+package com.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Table(name="Projects")
@@ -21,6 +19,11 @@ public class Project extends EntityObject{
 
     @Column(name="synopsis")
     private String synopsis;
+
+    public Project() {
+
+    }
+
     public Project(final String projectTitle, final String projectSynopsis) {
         super();
         this.title = projectTitle;

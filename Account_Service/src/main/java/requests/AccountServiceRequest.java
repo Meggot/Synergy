@@ -1,6 +1,6 @@
 package requests;
 
-import abstracts.SynergyRequest;
+import com.abstracts.SynergyRequest;
 
 /**
  * Created by bradleyw on 24/03/2018.

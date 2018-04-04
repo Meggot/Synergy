@@ -1,6 +1,6 @@
 package requests;
 
-import models.Account;
+import com.models.Account;
 
 /**
  * Created by bradleyw on 24/03/2018.

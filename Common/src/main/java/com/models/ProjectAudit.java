@@ -1,21 +1,26 @@
-package models;
+package com.models;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name="Project_Tags")
-public class ProjectTag extends EntityObject{
+@Table(name="Project_Audits")
+public class ProjectAudit extends EntityObject{
+
     @Id
-    @Column(name="pk_tag_id")
+    @Column(name="pk_audit_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    @OneToOne
     @JoinColumn(name="fk_project_id")
     private Project project;
     @Column(name="value")
     private String value;
 
-    public ProjectTag(final Project project, final String value) {
-        super();
+    public ProjectAudit() {
+
+    }
+
+    public ProjectAudit(final Project project, final String value) {
         this.project = project;
         this.value = value;
     }

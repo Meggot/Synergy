@@ -1,10 +1,8 @@
 package sessions;
 
-import models.Account;
+import com.models.Account;
 import sessions.models.SessionContext;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.net.InetAddress;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;

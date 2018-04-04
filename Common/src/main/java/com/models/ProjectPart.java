@@ -1,4 +1,4 @@
-package models;
+package com.models;
 
 import javax.persistence.*;
 
@@ -17,6 +17,10 @@ public class ProjectPart extends EntityObject{
     private Long position;
     @Column(name="body")
     private String body;
+
+    public ProjectPart() {
+
+    }
 
     public ProjectPart(final Project project, final Account author, final Long position, final String body) {
         super();
