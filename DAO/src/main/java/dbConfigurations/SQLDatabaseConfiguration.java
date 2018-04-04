@@ -12,7 +12,6 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@Profile("default")
 public class SQLDatabaseConfiguration {
 
     @Value("${dao.jdbc.username}")

@@ -22,7 +22,6 @@ import static org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType.
  */
 @Configuration
 @ComponentScan({"dao"})
-@Profile("test")
 @EnableJpaRepositories("dao.repositories")
 public class EmbeddedDatabaseConfiguration {
 
