@@ -14,6 +14,7 @@ import com.requests.LoginAccountRequest;
 import com.responses.CreateAccountResponse;
 import com.responses.LoginAccountResponse;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.xml.ws.Response;
 import java.util.List;
@@ -31,7 +32,8 @@ public class AccountController {
 
     @ResponseBody
     @RequestMapping(path = "/login")
-    public LoginAccountResponse login(@RequestBody final LoginAccountRequest request) {
+    public LoginAccountResponse login(@RequestBody final LoginAccountRequest request, HttpSession session) {
+        session.setAttribute("session", session);
         return accountRequestHandler.handleLoginRequest(request);
     }
 

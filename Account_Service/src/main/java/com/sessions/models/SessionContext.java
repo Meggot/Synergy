@@ -1,6 +1,8 @@
 package com.sessions.models;
 
 import com.models.entity.Account;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.net.InetAddress;
 import java.util.Date;
@@ -9,6 +11,8 @@ import java.util.List;
 /**
  * Created by bradleyw on 24/03/2018.
  */
+@Component
+@Scope("Session")
 public class SessionContext {
     private Account account;
     private Date lastMessageRecieved;
