@@ -1,7 +1,7 @@
 package com.controllers;
 
-import handlers.ProjectRequestHandler;
-import com.models.Project;
+import com.handlers.ProjectRequestHandler;
+import com.models.entity.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
