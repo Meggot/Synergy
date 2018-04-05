@@ -12,6 +12,8 @@ public class AccountDaoMemory implements AccountDao{
 
     private Set<Account> accounts;
 
+    private int lastId = 0;
+
     public AccountDaoMemory() {
     }
 
@@ -45,7 +47,9 @@ public class AccountDaoMemory implements AccountDao{
 
     @Override
     public void createNewAccount(final String username, final String email, final Password password) {
-        getAccounts().add(new Account(username, email, password));
+        Account account = new Account(username, email, password);
+        account.setId(lastId++);
+        getAccounts().add(account);
     }
 
     @Override

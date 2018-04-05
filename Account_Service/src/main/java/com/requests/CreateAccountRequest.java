@@ -1,15 +1,27 @@
 package com.requests;
 
 import com.abstracts.SynergyRequest;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.beans.factory.annotation.Required;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by bradleyw on 24/03/2018.
  */
 public class CreateAccountRequest extends SynergyRequest{
+    @NotNull
+    @NotBlank
     private String username;
+    @NotNull
+    @NotBlank
     private String email;
+    @NotNull
+    @NotBlank
     private String hashedPassword;
-    private String saltUsed;
+    @NotNull
+    @NotBlank
+    private String salt;
 
     public CreateAccountRequest() {
 
@@ -19,7 +31,7 @@ public class CreateAccountRequest extends SynergyRequest{
         this.email = email;
         this.username = username;
         this.setHashedPassword(hashedPassword);
-        this.setSaltUsed(salt);
+        this.setSalt(salt);
     }
 
     public String getUsername() {
@@ -46,11 +58,21 @@ public class CreateAccountRequest extends SynergyRequest{
         this.hashedPassword = hashedPassword;
     }
 
-    public String getSaltUsed() {
-        return saltUsed;
+    public String getSalt() {
+        return salt;
     }
 
-    public void setSaltUsed(String saltUsed) {
-        this.saltUsed = saltUsed;
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    @Override
+    public String toString() {
+        return "CreateAccountRequest{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", hashedPassword='" + hashedPassword + '\'' +
+                ", salt='" + salt + '\'' +
+                '}';
     }
 }

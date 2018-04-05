@@ -1,5 +1,6 @@
 package com.handlers;
 
+import com.handlers.util.DateFormatPassing;
 import com.models.ResponseMessages;
 import dao.daoInterfaces.AccountDao;
 import com.interfaces.SynergyRequestHandler;
@@ -19,6 +20,9 @@ import com.responses.UpdateAccountResponse;
 import com.sessions.SessionsService;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,7 +56,7 @@ public class AccountRequestHandler implements SynergyRequestHandler{
                 response.setAccepted(false);
                 response.setMessage(ResponseMessages.DUPLICATE_USERNAME);
             } else {
-                Password generatedPassword = new Password(createAccountRequest.getHashedPassword(), createAccountRequest.getSaltUsed());
+                Password generatedPassword = new Password(createAccountRequest.getSalt(), createAccountRequest.getHashedPassword());
                 accountDao.createNewAccount(createAccountRequest.getUsername(), createAccountRequest.getEmail(), generatedPassword);
                 response.setAccepted(true);
                 response.setMessage(ResponseMessages.VALID_ACCOUNT_CREATION);
@@ -66,7 +70,73 @@ public class AccountRequestHandler implements SynergyRequestHandler{
     }
 
     public UpdateAccountResponse handleUpdateAccountRequest(UpdateAccountRequest updateAccountRequest) {
-        return null;
+        logger.debug("handleUpdateAccountRequest: Received new update account request=" + updateAccountRequest);
+        UpdateAccountResponse response = new UpdateAccountResponse(updateAccountRequest);
+        response.setAccepted(true);
+        boolean updatedFields = false;
+        List<String> proposedUpdates = new ArrayList<>();
+        try {
+            String updatedUsername = updateAccountRequest.getUsername();
+            String updatedEmail = updateAccountRequest.getEmail();
+            String updateDob = updateAccountRequest.getDob();
+            Account accountToUpdate = accountDao.getAccountById(updateAccountRequest.getAccountId());
+            if (accountToUpdate==null) {
+                response.setAccepted(false);
+                response.setMessage(ResponseMessages.USER_ID_INVALID);
+            } else {
+                if (updatedUsername != null && !updatedUsername.equals(accountToUpdate.getUsername())) {
+                    if (accountDao.getAccountByUsername(updatedUsername) != null) {
+                        response.setMessage(ResponseMessages.DUPLICATE_USERNAME);
+                        response.setAccepted(false);
+                        return response;
+                    } else {
+                        accountToUpdate.setUsername(updatedUsername);
+                        proposedUpdates.add("Username");
+                        updatedFields = true;
+                    }
+                }
+                if (updatedEmail != null && !updatedEmail.equals(accountToUpdate.getEmail())) {
+                    if (accountDao.getAccountByEmail(updatedEmail) != null) {
+                        response.setMessage(ResponseMessages.DUPLICATE_EMAIL);
+                        response.setAccepted(false);
+                        return response;
+                    } else {
+                        accountToUpdate.setEmail(updatedEmail);
+                        proposedUpdates.add("Email");
+                        updatedFields = true;
+                    }
+                }
+                    try {
+                        if (updateDob != null){
+                            Date formattedUpdatedDob = DateFormatPassing.getDobFromString(updateDob);
+                            if (accountToUpdate.getDateOfBirth()==null || ( accountToUpdate.getDateOfBirth()!=null && accountToUpdate.getDateOfBirth().compareTo(formattedUpdatedDob)!=0)) {
+                                accountToUpdate.setDateOfBirth(formattedUpdatedDob);
+                                proposedUpdates.add("DOB");
+                                updatedFields = true;
+                            }
+                        }
+                    } catch (ParseException e) {
+                        response.setMessage(ResponseMessages.INVALID_DATE_OF_BIRTH);
+                        response.setAccepted(false);
+                        return response;
+                    }
+            }
+            if (response.isAccepted()) {
+                if (updatedFields) {
+                    accountDao.updateAccount(accountToUpdate);
+                    response.setUpdatedFields(proposedUpdates);
+                    response.setMessage(ResponseMessages.VALID_ACCOUNT_UPDATE);
+                } else {
+                    response.setAccepted(false);
+                    response.setMessage(ResponseMessages.INVALID_ACCOUNT_UPDATE);
+                }
+            }
+        } catch (SQLException e) {
+            response.setMessage(ResponseMessages.DATABASE_ERROR);
+            response.setAccepted(false);
+        }
+        logger.debug("handleUpdateAccountRequest: Processed update account request, response=" + response);
+        return response;
     }
 
     public LoginAccountResponse handleLoginRequest(LoginAccountRequest loginAccountRequest) { return null;

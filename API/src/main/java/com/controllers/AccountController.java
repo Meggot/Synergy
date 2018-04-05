@@ -3,14 +3,18 @@ package com.controllers;
 import com.abstracts.SynergyResponse;
 import com.handlers.AccountRequestHandler;
 import com.models.entity.Account;
+import com.requests.UpdateAccountRequest;
+import com.responses.UpdateAccountResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.requests.CreateAccountRequest;
 import com.requests.LoginAccountRequest;
 import com.responses.CreateAccountResponse;
 import com.responses.LoginAccountResponse;
 
+import javax.validation.Valid;
 import javax.xml.ws.Response;
 import java.util.List;
 
@@ -39,14 +43,31 @@ public class AccountController {
 
     @ResponseBody
     @RequestMapping(path = "/id/{id}", method = RequestMethod.GET, produces = "application/json")
-    public Account getAccountRequestHandler(@PathVariable final Integer id) {
+    public Account getAccountById(@PathVariable final Integer id) {
         return accountRequestHandler.getUserById(id);
     }
 
     @ResponseBody
+    @RequestMapping(path="/update", method =RequestMethod.PUT, produces = "application/json")
+    public ResponseEntity<UpdateAccountResponse> updateAccount(@RequestBody @Valid final UpdateAccountRequest request,
+                                                               BindingResult result) {
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body(null);
+        } else {
+            return ResponseEntity.ok(accountRequestHandler.handleUpdateAccountRequest(request));
+        }
+    }
+
+    @ResponseBody
     @RequestMapping(path="/create", method = RequestMethod.PUT, produces = "application/json")
-    public ResponseEntity<CreateAccountResponse> createNewAccount(@RequestBody final CreateAccountRequest request) {
-        return ResponseEntity.ok(accountRequestHandler.handleCreateAccountRequest(request));
+    public ResponseEntity<CreateAccountResponse> createNewAccount(@RequestBody @Valid final CreateAccountRequest request,
+                                                                  BindingResult result) {
+       if (result.hasErrors()) {
+           System.out.println(result.getAllErrors());
+           return ResponseEntity.badRequest().body(null);
+       } else {
+           return ResponseEntity.ok(accountRequestHandler.handleCreateAccountRequest(request));
+       }
     }
 
 }
