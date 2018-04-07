@@ -25,10 +25,11 @@ public class Project extends EntityObject{
 
     }
 
-    public Project(final String projectTitle, final String projectSynopsis) {
+    public Project(final String projectTitle, final String projectSynopsis, final Account owner) {
         super();
         this.title = projectTitle;
         this.synopsis = projectSynopsis;
+        this.owner = owner;
     }
 
     public String getTitle() {

@@ -11,7 +11,10 @@ public enum ResponseMessages {
     VALID_ACCOUNT_UPDATE(4, "User has been successfully updated"),
     USER_ID_INVALID(5, "A user by that ID doesn't exist"),
     INVALID_DATE_OF_BIRTH(6, "That D.O.B date is invalid, format is: DD/MM/YYYY"),
-    INVALID_ACCOUNT_UPDATE(7, "No fields were changed, updates must have changed values in request");
+    INVALID_ACCOUNT_UPDATE(7, "No fields were changed, updates must have changed values in request"),
+    VALID_PROJECT_CREATION(8, "Project successfully created"),
+    ACCOUNT_DOESNT_EXIST(9, "Specified userid doesn't exist" ),
+    VALID_PROJECT_SEARCH(10, "Valid project search");
     private final int code;
     private final String description;
 
