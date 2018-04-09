@@ -4,12 +4,18 @@ import com.models.ResponseMessages;
 import com.models.entity.Account;
 import com.models.entity.Password;
 import com.models.entity.Project;
+import com.models.entity.ProjectSetting;
 import com.requests.ProjectCreationRequest;
 import com.requests.ProjectSearchRequest;
+import com.requests.ProjectSettingCreationRequest;
+import com.requests.ProjectSettingRequest;
 import com.responses.ProjectCreationResponse;
 import com.responses.ProjectSearchResponse;
+import com.responses.ProjectSettingCreationResponse;
+import com.responses.ProjectSettingResponse;
 import dao.daoImplementations.AccountDaoRepository;
 import dao.daoImplementations.ProjectDaoRepository;
+import dao.daoImplementations.ProjectSettingDaoRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +46,8 @@ public class ProjectRequestHandlerTest {
     private ProjectDaoRepository projectDao;
     @MockBean
     private AccountDaoRepository accountDao;
+    @MockBean
+    private ProjectSettingDaoRepository projectSettingDao;
 
     @Autowired
     private ProjectRequestHandler projectRequestHandler;
@@ -103,6 +111,43 @@ public class ProjectRequestHandlerTest {
         ProjectSearchResponse timeframeSearchResponse = projectRequestHandler.handleSearchRequest(timeframeSearchRequest);
         then(projectDao).should(times(1)).getProjectsInTimeFrame(any(Date.class), any(Date.class));
         assertThat(timeframeSearchResponse.getReturnValues()).containsOnly(project);
+    }
+
+    @Test
+    public void handleListProjectSettingRequest() {
+        final Project project = new Project("searchForMe", "projectSynopsis", modelAccount);
+        List<ProjectSetting> responseArray = new ArrayList<ProjectSetting>(){{
+            add(new ProjectSetting(project, "value", "key"));
+        }};
+        when(projectDao.getProjectById(1)).thenReturn(project);
+        when(projectSettingDao.getSettingsForProject(project)).thenReturn(responseArray);
+        ProjectSettingRequest projectSettingRequest = new ProjectSettingRequest(1);
+        ProjectSettingResponse projectSettingResponse = projectRequestHandler.handleListProjectSettingRequest(projectSettingRequest);
+        assertThat(projectSettingResponse.getMessage()).isEqualTo(ResponseMessages.VALID_PROJECT_SETTING);
+        assertThat(projectSettingResponse.isAccepted()).isTrue();
+        assertThat(projectSettingResponse.getSettingResponse()).isEqualTo(responseArray);
+
+        ProjectSettingRequest projectDoesntExistRequest = new ProjectSettingRequest(2);
+        ProjectSettingResponse projectDoesntExistResponse = projectRequestHandler.handleListProjectSettingRequest(projectDoesntExistRequest);
+        assertThat(projectDoesntExistResponse.getMessage()).isEqualTo(ResponseMessages.PROJECT_DOESNT_EXIST);
+        assertThat(projectDoesntExistResponse.isAccepted()).isFalse();
+        assertThat(projectDoesntExistResponse.getSettingResponse()).isNullOrEmpty();
+    }
+
+    @Test
+    public void handleSettingCreationProjectRequest() {
+        final Project project = new Project("searchForMe", "projectSynopsis", modelAccount);
+        when(projectDao.getProjectById(1)).thenReturn(project);
+        ProjectSettingCreationRequest validProjectSettingCreationRequest = new ProjectSettingCreationRequest(1, "test", "value");
+        ProjectSettingCreationResponse validProjectSettingCreation = projectRequestHandler.handleCreateProjectSettingRequet(validProjectSettingCreationRequest);
+        assertThat(validProjectSettingCreation.getMessage()).isEqualTo(ResponseMessages.PROJECT_SETTING_ADDED);
+        assertThat(validProjectSettingCreation.isAccepted()).isTrue();
+        verify(projectSettingDao,times(1)).addSettingForProject(any(Project.class), anyString(), anyString());
+
+        ProjectSettingCreationRequest projectDoesntExistRequest = new ProjectSettingCreationRequest(2, "test", "value");
+        ProjectSettingCreationResponse projectDoesntExistResponse = projectRequestHandler.handleCreateProjectSettingRequet(projectDoesntExistRequest);
+        assertThat(projectDoesntExistResponse.getMessage()).isEqualTo(ResponseMessages.PROJECT_DOESNT_EXIST);
+        assertThat(projectDoesntExistResponse.isAccepted()).isFalse();
     }
 }
 

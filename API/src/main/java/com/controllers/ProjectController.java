@@ -1,12 +1,15 @@
 package com.controllers;
 
 import com.handlers.ProjectRequestHandler;
-import com.models.entity.EntityObject;
 import com.models.entity.Project;
 import com.requests.ProjectCreationRequest;
 import com.requests.ProjectSearchRequest;
+import com.requests.ProjectSettingCreationRequest;
+import com.requests.ProjectSettingRequest;
 import com.responses.ProjectCreationResponse;
 import com.responses.ProjectSearchResponse;
+import com.responses.ProjectSettingCreationResponse;
+import com.responses.ProjectSettingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,33 +28,51 @@ public class ProjectController {
     @Autowired
     ProjectRequestHandler projectRequestHandler;
 
+    //project/{id}/settings/ -listsallsettingsforproject
+    //project/{id}settings/create/?=settingkey,?settingvalue
+
     @ResponseBody
-    @RequestMapping(path="/id/{id}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path = "/setting/{id}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<ProjectSettingResponse> listProjectSettingsForProject(@PathVariable final Integer id) {
+        return ResponseEntity.ok(projectRequestHandler.handleListProjectSettingRequest(new ProjectSettingRequest(id)));
+    }
+
+    @ResponseBody
+    @RequestMapping(path = "/setting/{id}/create", method = RequestMethod.PUT, produces = "application/json")
+    public ResponseEntity<ProjectSettingCreationResponse> createNewProjectSetting(@PathVariable final Integer id,
+                                                                                  @RequestParam final String settingKey,
+                                                                                  @RequestParam final String settingValue) {
+        ProjectSettingCreationRequest createProjectSettingRequest = new ProjectSettingCreationRequest(id, settingKey, settingValue);
+        return ResponseEntity.ok(projectRequestHandler.handleCreateProjectSettingRequet(createProjectSettingRequest));
+    }
+
+    @ResponseBody
+    @RequestMapping(path = "/id/{id}", method = RequestMethod.GET, produces = "application/json")
     public Project getProjectById(@PathVariable Integer id) {
         return projectRequestHandler.getProjectById(id);
     }
 
     @ResponseBody
-    @RequestMapping(path="/name/{name}",  method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path = "/name/{name}", method = RequestMethod.GET, produces = "application/json")
     public List<Project> getProjectsByName(@PathVariable String projectName) {
         return null;
     }
 
     @ResponseBody
-    @RequestMapping(path="/tag/{tag}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path = "/tag/{tag}", method = RequestMethod.GET, produces = "application/json")
     public List<Project> getProjectsWithTags(@PathVariable String tags) {
         //Extrapolate tags from csv value in path?
         return null;
     }
 
     @ResponseBody
-    @RequestMapping(path="/create", method = RequestMethod.PUT, produces = "application/json")
+    @RequestMapping(path = "/create", method = RequestMethod.PUT, produces = "application/json")
     public ResponseEntity<ProjectCreationResponse> createNewProject(@RequestBody final ProjectCreationRequest request) throws SQLException {
         return ResponseEntity.ok(projectRequestHandler.handleCreateNewProject(request));
     }
 
     @ResponseBody
-    @RequestMapping(path="/search", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path = "/search", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<ProjectSearchResponse> searchProjects(@RequestParam(required = false) final String name,
                                                                 @RequestParam(required = false) final Integer ownerId,
                                                                 @RequestParam(required = false) final Date dateFrom,

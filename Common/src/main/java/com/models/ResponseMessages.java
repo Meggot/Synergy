@@ -14,7 +14,11 @@ public enum ResponseMessages {
     INVALID_ACCOUNT_UPDATE(7, "No fields were changed, updates must have changed values in request"),
     VALID_PROJECT_CREATION(8, "Project successfully created"),
     ACCOUNT_DOESNT_EXIST(9, "Specified userid doesn't exist" ),
-    VALID_PROJECT_SEARCH(10, "Valid project search");
+    VALID_PROJECT_SEARCH(10, "Valid project search"),
+    PROJECT_DOESNT_EXIST(11, "That projectID doesn't exist" ),
+    VALID_PROJECT_SETTING(12, "Valid project setting request" ),
+    PROJECT_SETTING_ADDED(13, "Project setting added successfully"),
+    VALID_PROJECT_PART_SEARCH(14, "Project part search valid");
     private final int code;
     private final String description;
 

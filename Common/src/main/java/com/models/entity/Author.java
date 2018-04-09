@@ -10,7 +10,7 @@ public class Author extends EntityObject {
     @Column(name="pk_author_id")
     @SequenceGenerator(name="authors_seq", sequenceName="authors_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "authors_seq")
-    private int id;
+    private Integer id;
     @OneToOne
     @JoinColumn(name="fk_project_part_id")
     private ProjectPart projectPart;

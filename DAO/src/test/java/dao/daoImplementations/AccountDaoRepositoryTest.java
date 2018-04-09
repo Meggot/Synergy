@@ -35,7 +35,7 @@ public class AccountDaoRepositoryTest {
     }
 
     @Test
-    public void createNewAccount() throws Exception {
+    public  void createNewAccount() throws Exception {
         assertThat(accountDaoRepository.getAccountByEmail("footest@foonet.com")).isNull();
         assertThat(accountDaoRepository.getAccountByUsername("Jimbob")).isNull();
         accountDaoRepository.createNewAccount("Jimbob", "footest@foonet.com", new Password("password2", "password"));

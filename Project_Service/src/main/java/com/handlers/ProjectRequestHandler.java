@@ -4,10 +4,14 @@ import com.models.ResponseMessages;
 import com.models.entity.Account;
 import com.models.entity.Project;
 import com.requests.ProjectSearchRequest;
+import com.requests.ProjectSettingCreationRequest;
+import com.requests.ProjectSettingRequest;
 import com.responses.ProjectSearchResponse;
+import com.responses.ProjectSettingCreationResponse;
+import com.responses.ProjectSettingResponse;
 import dao.daoInterfaces.AccountDao;
 import dao.daoInterfaces.ProjectDao;
-import org.hibernate.cfg.NotYetImplementedException;
+import dao.daoInterfaces.ProjectSettingDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.requests.ProjectCreationRequest;
@@ -28,6 +32,8 @@ public class ProjectRequestHandler {
     ProjectDao projectDao;
     @Autowired
     AccountDao accountDao;
+    @Autowired
+    ProjectSettingDao projectSettingDao;
 
     public ProjectCreationResponse handleCreateNewProject(ProjectCreationRequest projectCreationRequest) {
         ProjectCreationResponse response =  new ProjectCreationResponse(projectCreationRequest);
@@ -101,4 +107,31 @@ public class ProjectRequestHandler {
         return response;
     }
 
+    public ProjectSettingResponse handleListProjectSettingRequest(final ProjectSettingRequest projectSettingRequest) {
+        Project project = projectDao.getProjectById(projectSettingRequest.getProjectId());
+        ProjectSettingResponse response = new ProjectSettingResponse(projectSettingRequest);
+        if (project!=null) {
+            response.setSettingResponse(projectSettingDao.getSettingsForProject(project));
+            response.setMessage(ResponseMessages.VALID_PROJECT_SETTING);
+            response.setAccepted(true);
+        } else {
+            response.setMessage(ResponseMessages.PROJECT_DOESNT_EXIST);
+            response.setAccepted(false);
+        }
+        return response;
+    }
+
+    public ProjectSettingCreationResponse handleCreateProjectSettingRequet(final ProjectSettingCreationRequest createProjectSettingRequest) {
+        Project project = projectDao.getProjectById(createProjectSettingRequest.getProjectId());
+        ProjectSettingCreationResponse response = new ProjectSettingCreationResponse(createProjectSettingRequest);
+        if (project!=null) {
+            projectSettingDao.addSettingForProject(project, createProjectSettingRequest.getSettingKey(), createProjectSettingRequest.getSettingValue());
+            response.setMessage(ResponseMessages.PROJECT_SETTING_ADDED);
+            response.setAccepted(true);
+        } else {
+            response.setMessage(ResponseMessages.PROJECT_DOESNT_EXIST);
+            response.setAccepted(false);
+        }
+        return response;
+    }
 }
