@@ -86,3 +86,28 @@ CREATE TABLE User_Audits(
    deleted INTEGER DEFAULT 0,
    oca INTEGER DEFAULT 1
 );
+
+CREATE TABLE Project_Part_Votes(
+    pk_project_part_votes_id INTEGER PRIMARY KEY,
+    fk_project_part_id INTEGER FOREIGN KEY REFERENCES Project_Parts(pk_project_part_id),
+    fk_account_id INTEGER FOREIGN KEY REFERENCES Accounts(pk_fk_account_id),
+    vote INTEGER(1) NOT NULL,
+    creation_date DATE NOT NULL,
+    modified_date DATE NOT NULL,
+    deleted INTEGER DEFAULT 0,
+    oca INTEGER DEFAULT 1,
+    CONSTRAINT allowed_vote_values (vote == 1 OR vote == -1)
+    );
+
+CREATE TABLE Project_Meta_Data(
+    pk_project_meta_data_id INTEGER PRIMARY KEY,
+    fk_project_id INTEGER FOREIGN KEY REFERENCES Projects(pk_project_id),
+    upvotes INTEGER DEFAULT 0,
+    downvotes INTEGER DEFAULT 0
+    favourites INTEGER DEFAULT 0,
+    shares INTEGER DEFAULT 0,
+    creation_date DATE NOT NULL,
+    modified_date DATE NOT NULL,
+    deleted INTEGER DEFAULT 0,
+    oca INTEGER DEFAULT 1
+    );

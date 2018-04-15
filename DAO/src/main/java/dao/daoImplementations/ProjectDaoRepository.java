@@ -5,6 +5,9 @@ import com.models.entity.Project;
 import dao.daoInterfaces.ProjectDao;
 import dao.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 
 import java.util.Date;
@@ -41,4 +44,24 @@ public class ProjectDaoRepository implements ProjectDao {
         return projectRepository.getProjectsByCreationDateBetween(from, till);
     }
 
+    @Override
+    public List<Project> getNewProjects(int maxResults) {
+        return getSortedProjects(maxResults, "created_date");
+    }
+
+    @Override
+    public List<Project> getUpdatedProjects(int maxResults) {
+        return getSortedProjects(maxResults, "modified_date");
+    }
+
+    private List<Project> getSortedProjects(int maxResults, String sortField) {
+        final Sort sort = new Sort(Sort.Direction.DESC, sortField);
+        final Pageable limit = new PageRequest(0, maxResults);
+        return projectRepository.getProjectsSorted(limit, sort);
+    }
+
+    @Override
+    public List<Project> getTopProjects(Date from, int maxResults) {
+        return projectRepository.getTopProjects(from, maxResults);
+    }
 }

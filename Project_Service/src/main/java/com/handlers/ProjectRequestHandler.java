@@ -1,5 +1,6 @@
 package com.handlers;
 
+import com.models.DatePeriod;
 import com.models.ResponseMessages;
 import com.models.entity.Account;
 import com.models.entity.Project;
@@ -133,5 +134,22 @@ public class ProjectRequestHandler {
             response.setAccepted(false);
         }
         return response;
+    }
+
+
+    public List<Project> getNewProjects(int maxResults) {
+        return this.projectDao.getNewProjects(maxResults);
+    }
+
+
+    public List<Project> getUpdatedProjects(int maxResults) {
+        return this.projectDao.getUpdatedProjects(maxResults);
+    }
+
+
+    public List<Project> getTopProjects(DatePeriod period, int maxResults) {
+
+        Date date = Date.from(period.getDate().toInstant());
+        return null;
     }
 }
