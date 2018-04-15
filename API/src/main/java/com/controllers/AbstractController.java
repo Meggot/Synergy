@@ -18,5 +18,4 @@ public abstract class AbstractController {
     protected String handleNoDataFoundException(NoDataFoundException ex) {
         return ex.getMessage();
     }
-
 }

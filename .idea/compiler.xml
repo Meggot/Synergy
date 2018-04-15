@@ -15,7 +15,6 @@
         <module name="End_To_End_Testing" />
         <module name="Infrastructure" />
         <module name="Project_Service" />
-        <module name="Web_App" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

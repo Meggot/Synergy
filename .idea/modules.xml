@@ -10,7 +10,6 @@
       <module fileurl="file://$PROJECT_DIR$/End_To_End_Testing/End_To_End_Testing.iml" filepath="$PROJECT_DIR$/End_To_End_Testing/End_To_End_Testing.iml" />
       <module fileurl="file://$PROJECT_DIR$/Infrastructure/Infrastructure.iml" filepath="$PROJECT_DIR$/Infrastructure/Infrastructure.iml" />
       <module fileurl="file://$PROJECT_DIR$/Project_Service/Project_Service.iml" filepath="$PROJECT_DIR$/Project_Service/Project_Service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Web_App/Web_App.iml" filepath="$PROJECT_DIR$/Web_App/Web_App.iml" />
       <module fileurl="file://$PROJECT_DIR$/parent.iml" filepath="$PROJECT_DIR$/parent.iml" />
     </modules>
   </component>

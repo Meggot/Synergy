@@ -7,8 +7,6 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/Web_App/pom.xml" />
-        <option value="$PROJECT_DIR$/API/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
