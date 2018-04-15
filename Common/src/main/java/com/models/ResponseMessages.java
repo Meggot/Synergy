@@ -18,7 +18,9 @@ public enum ResponseMessages {
     PROJECT_DOESNT_EXIST(11, "That projectID doesn't exist" ),
     VALID_PROJECT_SETTING(12, "Valid project setting request" ),
     PROJECT_SETTING_ADDED(13, "Project setting added successfully"),
-    VALID_PROJECT_PART_SEARCH(14, "Project part search valid");
+    VALID_PROJECT_PART_SEARCH(14, "Project part search valid"),
+    INVALID_REQUEST(15, "Request was invalid"),
+    INVALID_PROJECT_PART_SEARCH(15, "That search was invalid, please specify search terms");
     private final int code;
     private final String description;
 

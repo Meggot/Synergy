@@ -1,5 +1,6 @@
 package com.handlers;
 
+import com.exceptions.NoDataFoundException;
 import com.handlers.util.DateFormatPassing;
 import com.models.ResponseMessages;
 import dao.daoInterfaces.AccountDao;
@@ -69,7 +70,7 @@ public class AccountRequestHandler implements SynergyRequestHandler{
         return response;
     }
 
-    public UpdateAccountResponse handleUpdateAccountRequest(UpdateAccountRequest updateAccountRequest) {
+    public UpdateAccountResponse handleUpdateAccountRequest(UpdateAccountRequest updateAccountRequest) throws NoDataFoundException{
         logger.debug("handleUpdateAccountRequest: Received new update account request=" + updateAccountRequest);
         UpdateAccountResponse response = new UpdateAccountResponse(updateAccountRequest);
         response.setAccepted(true);

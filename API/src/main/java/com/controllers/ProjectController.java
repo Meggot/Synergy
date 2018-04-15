@@ -23,13 +23,10 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/project")
-public class ProjectController {
+public class ProjectController extends AbstractController {
 
     @Autowired
     ProjectRequestHandler projectRequestHandler;
-
-    //project/{id}/settings/ -listsallsettingsforproject
-    //project/{id}settings/create/?=settingkey,?settingvalue
 
     @ResponseBody
     @RequestMapping(path = "/setting/{id}", method = RequestMethod.GET, produces = "application/json")

@@ -1,6 +1,7 @@
 package com.controllers;
 
 import com.abstracts.SynergyResponse;
+import com.exceptions.NoDataFoundException;
 import com.handlers.AccountRequestHandler;
 import com.models.entity.Account;
 import com.requests.UpdateAccountRequest;
@@ -25,7 +26,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(path = "/accounts", produces = "application/json")
-public class AccountController {
+public class AccountController extends AbstractController {
 
     @Autowired
     private AccountRequestHandler accountRequestHandler;
@@ -46,11 +47,15 @@ public class AccountController {
     @ResponseBody
     @RequestMapping(path = "/id/{id}", method = RequestMethod.GET, produces = "application/json")
     public Account getAccountById(@PathVariable final Integer id) {
-        return accountRequestHandler.getUserById(id);
+        Account account = accountRequestHandler.getUserById(id);
+        if (account == null) {
+            throw new NoDataFoundException("Can't find an account by that ID");
+        }
+        return account;
     }
 
     @ResponseBody
-    @RequestMapping(path="/update", method =RequestMethod.PUT, produces = "application/json")
+    @RequestMapping(path = "/update", method = RequestMethod.PUT, produces = "application/json")
     public ResponseEntity<UpdateAccountResponse> updateAccount(@RequestBody @Valid final UpdateAccountRequest request,
                                                                BindingResult result) {
         if (result.hasErrors()) {
@@ -61,15 +66,15 @@ public class AccountController {
     }
 
     @ResponseBody
-    @RequestMapping(path="/create", method = RequestMethod.PUT, produces = "application/json")
+    @RequestMapping(path = "/create", method = RequestMethod.PUT, produces = "application/json")
     public ResponseEntity<CreateAccountResponse> createNewAccount(@RequestBody @Valid final CreateAccountRequest request,
                                                                   BindingResult result) {
-       if (result.hasErrors()) {
-           System.out.println(result.getAllErrors());
-           return ResponseEntity.badRequest().body(null);
-       } else {
-           return ResponseEntity.ok(accountRequestHandler.handleCreateAccountRequest(request));
-       }
+        if (result.hasErrors()) {
+            System.out.println(result.getAllErrors());
+            return ResponseEntity.badRequest().body(null);
+        } else {
+            return ResponseEntity.ok(accountRequestHandler.handleCreateAccountRequest(request));
+        }
     }
 
 }

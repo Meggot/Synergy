@@ -9,9 +9,9 @@ import dao.daoInterfaces.AccountDao;
 import dao.daoInterfaces.AuthorDao;
 import dao.daoInterfaces.ProjectDao;
 import dao.daoInterfaces.ProjectPartDao;
-import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 @Component
 public class ProjectPartRequestHandler {
@@ -26,15 +26,15 @@ public class ProjectPartRequestHandler {
     AuthorDao authorDao;
 
     public ProjectPart getProjectPartById(Integer projectPartId) {
-        projectPartDao.getProjectPartById(projectPartId);
+        return projectPartDao.getProjectPartById(projectPartId);
     }
 
     public ProjectPartSearchResponse handleProjectPartSearchRequest(ProjectPartSearchRequest request) {
-        throw new NotYetImplementedException("Not yet implemented");
+        throw new NotImplementedException();
     }
 
     public ProjectPartCreationResponse handleProjectPartCreationRequest(ProjectPartCreationRequest request){
-        throw new NotYetImplementedException("Not yet implemented");
+        throw new NotImplementedException();
     }
 }
 ;
