@@ -47,11 +47,7 @@ public class AccountController extends AbstractController {
     @ResponseBody
     @RequestMapping(path = "/id/{id}", method = RequestMethod.GET, produces = "application/json")
     public Account getAccountById(@PathVariable final Integer id) {
-        Account account = accountRequestHandler.getUserById(id);
-        if (account == null) {
-            throw new NoDataFoundException("Can't find an account by that ID");
-        }
-        return account;
+        return accountRequestHandler.getUserById(id);
     }
 
     @ResponseBody

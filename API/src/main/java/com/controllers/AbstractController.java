@@ -1,6 +1,7 @@
 package com.controllers;
 
 import com.abstracts.SynergyResponse;
+import com.exceptions.DatabaseErrorException;
 import com.exceptions.NoDataFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +17,12 @@ public abstract class AbstractController {
     @ExceptionHandler(NoDataFoundException.class)
     @ResponseBody
     protected String handleNoDataFoundException(NoDataFoundException ex) {
+        return ex.getMessage();
+    }
+
+    @ExceptionHandler(DatabaseErrorException.class)
+    @ResponseBody
+    protected String handleDatabaseErrorException(DatabaseErrorException ex) {
         return ex.getMessage();
     }
 }

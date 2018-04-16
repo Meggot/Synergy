@@ -1,5 +1,6 @@
 package com.handlers;
 
+import com.exceptions.DatabaseErrorException;
 import com.exceptions.NoDataFoundException;
 import com.handlers.util.DateFormatPassing;
 import com.models.ResponseMessages;
@@ -163,7 +164,11 @@ public class AccountRequestHandler implements SynergyRequestHandler{
         Account accountById = null;
         try {
             accountById = accountDao.getAccountById(id);
+            if (accountById == null) {
+                throw new NoDataFoundException("Can't find an account with that id");
+            }
         } catch (SQLException e) {
+            throw new DatabaseErrorException("Internal database error");
         }
         return accountById;
     }
