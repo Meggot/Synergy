@@ -21,8 +21,12 @@ public class Project extends EntityObject{
     @Column(name="synopsis")
     private String synopsis;
 
-    public Project() {
+    @OneToOne()
+    @JoinColumn(name = "fk_project_id")
+    private ProjectMetaData metaData;
 
+    public Project() {
+        this.metaData = new ProjectMetaData();
     }
 
     public Project(final String projectTitle, final String projectSynopsis, final Account owner) {
@@ -30,6 +34,7 @@ public class Project extends EntityObject{
         this.title = projectTitle;
         this.synopsis = projectSynopsis;
         this.owner = owner;
+        this.metaData = new ProjectMetaData();
     }
 
     public String getTitle() {
@@ -62,5 +67,13 @@ public class Project extends EntityObject{
 
     public void setOwner(final Account owner) {
         this.owner = owner;
+    }
+
+    public ProjectMetaData getMetaData() {
+        return metaData;
+    }
+
+    public void setMetaData(ProjectMetaData metaData) {
+        this.metaData = metaData;
     }
 }

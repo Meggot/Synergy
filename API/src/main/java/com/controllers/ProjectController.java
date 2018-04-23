@@ -1,6 +1,7 @@
 package com.controllers;
 
 import com.handlers.ProjectRequestHandler;
+import com.models.DatePeriod;
 import com.models.entity.Project;
 import com.requests.ProjectCreationRequest;
 import com.requests.ProjectSearchRequest;
@@ -81,5 +82,33 @@ public class ProjectController extends AbstractController {
         request.setDateTo(dateTo);
         return ResponseEntity.ok(projectRequestHandler.handleSearchRequest(request));
     }
+
+    @ResponseBody
+    @RequestMapping(path = "/top", method = RequestMethod.GET, produces = "application/json")
+    public List<Project> getTopProjects(@RequestParam(name = "maxResults", defaultValue = "50") int maxResults,
+                                        @RequestParam DatePeriod period) {
+        return this.projectRequestHandler.getTopProjects(period, maxResults);
+    }
+
+    @ResponseBody
+    @RequestMapping(path = "/hot", method = RequestMethod.GET, produces = "application/json")
+    public List<Project> getHotProjects(@RequestParam(name = "maxResults", defaultValue = "50") int maxResults) {
+        //need to add logic for upvotes
+        return null;
+    }
+
+    @ResponseBody
+    @RequestMapping(path = "/new", method = RequestMethod.GET, produces = "application/json")
+    public List<Project> getNewProjects(@RequestParam(name = "maxResults", defaultValue = "50") int maxResults) {
+        return this.projectRequestHandler.getNewProjects(maxResults);
+    }
+
+    @ResponseBody
+    @RequestMapping(path = "/updated", method = RequestMethod.GET, produces = "application/json")
+    public List<Project> getUpdatedProjects(@RequestParam(name = "maxResults", defaultValue = "50") int maxResults) {
+        return this.projectRequestHandler.getUpdatedProjects(maxResults);
+    }
+
+
 
 }
