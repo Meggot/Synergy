@@ -136,6 +136,7 @@ public class ProjectRequestHandler {
         return response;
     }
 
+/*
 
     public List<Project> getNewProjects(int maxResults) {
         return this.projectDao.getNewProjects(maxResults);
@@ -145,6 +146,7 @@ public class ProjectRequestHandler {
     public List<Project> getUpdatedProjects(int maxResults) {
         return this.projectDao.getUpdatedProjects(maxResults);
     }
+*/
 
 
     public List<Project> getTopProjects(DatePeriod period, int maxResults) {

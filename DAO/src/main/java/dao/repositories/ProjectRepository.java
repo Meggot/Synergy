@@ -18,5 +18,5 @@ public interface ProjectRepository extends JpaRepository<Project, Integer>{
     List<Project> getProjectsByTitle(String title);
     List<Project> getProjectsByOwner(Account owner);
     List<Project> getProjectsByCreationDateBetween(Date from, Date to);
-    List<Project> getProjectsSorted(Pageable limit, Sort sort);
+    //List<Project> getProjectsSorted(Pageable limit, Sort sort);
 }

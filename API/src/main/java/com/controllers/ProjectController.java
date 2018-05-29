@@ -97,6 +97,7 @@ public class ProjectController extends AbstractController {
         return null;
     }
 
+/*
     @ResponseBody
     @RequestMapping(path = "/new", method = RequestMethod.GET, produces = "application/json")
     public List<Project> getNewProjects(@RequestParam(name = "maxResults", defaultValue = "50") int maxResults) {
@@ -108,6 +109,7 @@ public class ProjectController extends AbstractController {
     public List<Project> getUpdatedProjects(@RequestParam(name = "maxResults", defaultValue = "50") int maxResults) {
         return this.projectRequestHandler.getUpdatedProjects(maxResults);
     }
+*/
 
 
 

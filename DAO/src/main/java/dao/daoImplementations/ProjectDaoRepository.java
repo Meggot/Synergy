@@ -44,7 +44,7 @@ public class ProjectDaoRepository implements ProjectDao {
         return projectRepository.getProjectsByCreationDateBetween(from, till);
     }
 
-    @Override
+ /*   @Override
     public List<Project> getNewProjects(int maxResults) {
         return getSortedProjects(maxResults, "created_date");
     }
@@ -53,15 +53,11 @@ public class ProjectDaoRepository implements ProjectDao {
     public List<Project> getUpdatedProjects(int maxResults) {
         return getSortedProjects(maxResults, "modified_date");
     }
-
-    private List<Project> getSortedProjects(int maxResults, String sortField) {
+*/
+  /*  private List<Project> getSortedProjects(int maxResults, String sortField) {
         final Sort sort = new Sort(Sort.Direction.DESC, sortField);
         final Pageable limit = new PageRequest(0, maxResults);
         return projectRepository.getProjectsSorted(limit, sort);
     }
-
-    @Override
-    public List<Project> getTopProjects(Date from, int maxResults) {
-        return projectRepository.getTopProjects(from, maxResults);
-    }
+*/
 }

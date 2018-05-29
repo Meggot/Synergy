@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public abstract class AbstractController {
 
-    @ExceptionHandler(NoDataFoundException.class)
+   /* @ExceptionHandler(NoDataFoundException.class)
     @ResponseBody
     protected String handleNoDataFoundException(NoDataFoundException ex) {
-        return ex.getMessage();
+        return ex.getMessage()
     }
-
+*/
     @ExceptionHandler(DatabaseErrorException.class)
     @ResponseBody
     protected String handleDatabaseErrorException(DatabaseErrorException ex) {

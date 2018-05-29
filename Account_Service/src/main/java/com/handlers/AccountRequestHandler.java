@@ -165,7 +165,7 @@ public class AccountRequestHandler implements SynergyRequestHandler{
         try {
             accountById = accountDao.getAccountById(id);
             if (accountById == null) {
-                throw new NoDataFoundException("Can't find an account with that id");
+                throw new NoDataFoundException("Dan't find an account with that id");
             }
         } catch (SQLException e) {
             throw new DatabaseErrorException("Internal database error");
